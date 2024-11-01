@@ -1,0 +1,17 @@
+First, start up both the TNMR and MATLAB software.  Then, at the MATLAB command prompt (or create a *.m file to do this for a program) type:
+ 
+ntnmr_app = actxserver('ntnmr.application');
+ntnmr_data = actxserver('ntnmr.document');
+invoke(ntnmr_data,'OpenFile',ntnmr_document_file);
+ 
+where ntnmr_document_file is a string containing the filename of the TNMR file (*.tnt) that you want it to open.  You now have a link between the TNMR and MATLAB software and an active document.  You can then use commands like:
+ 
+invoke(ntnmr_data,'SetNMRParameter','Observe Freq.',ntnmr_ObserveFreq);
+invoke(ntnmr_data,'SetNMRParameter','Acq. Points', ntnmr_acqpoints);
+invoke(ntnmr_data,'SetNMRParameter','SW +/-',ntnmr_sweepwidth);
+time_delays_list = invoke(ntnmr_data,'GetTable','Decay Delay');
+ 
+in order to change/get the parameters within TNMR for the loaded sequence.
+
+Chapter 12 "Automation" in the TNMR Reference Manual provides a list of available commands and their syntax.  With this list you can control most of the commands of TNMR including data acquisition, parameter management, and pulse sequence variables and tables.
+ 
